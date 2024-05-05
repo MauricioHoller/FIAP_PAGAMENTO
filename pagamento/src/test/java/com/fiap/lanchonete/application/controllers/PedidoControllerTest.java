@@ -16,7 +16,6 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -25,7 +24,6 @@ import com.fiap.lanchonete.pagamento.application.usecases.PedidoUseCases;
 import com.fiap.lanchonete.pagamento.application.usecases.exceptions.PedidoNaoEncontradoException;
 import com.fiap.lanchonete.pagamento.domain.entity.Pedido;
 import com.fiap.lanchonete.pagamento.domain.entity.StatusPagamento;
-import com.fiap.lanchonete.pagamento.domain.entity.StatusPedido;
 import com.fiap.lanchonete.pagamento.infrastructure.controller.PedidoController;
 import com.fiap.lanchonete.pagamento.infrastructure.mapper.PedidoRequestMapper;
 
@@ -59,7 +57,7 @@ class PedidoControllerTest {
     @Test
     void testBuscaPedidosPorId_Existente() throws Exception {
     	  int id = 1;
-    	  Pedido pedido = new Pedido(id, new ArrayList<>(), StatusPagamento.EsperandoConfirmação, BigDecimal.TEN);
+    	  Pedido pedido = new Pedido(id, new ArrayList<>(), StatusPagamento.PENDENTE, BigDecimal.TEN);
     	  when(pedidoUseCases.buscaPedidoId(id)).thenReturn(pedido);
 
     	    mockMvc.perform(get("/api/v1/pedido/{id}", id))
@@ -79,7 +77,7 @@ class PedidoControllerTest {
     @Test
     void testWebHookMercadoPagoSimulator_Pago() throws Exception {
         int id = 1;
-        Pedido pedido = new Pedido(id, new ArrayList<>(), StatusPagamento.Pago, BigDecimal.TEN);
+        Pedido pedido = new Pedido(id, new ArrayList<>(), StatusPagamento.PAGO, BigDecimal.TEN);
         when(pedidoUseCases.atualizaPedidoPagamento(any(), anyInt())).thenReturn(pedido);
 
         mockMvc.perform(post("/api/v1/pedido/pagamento/mercadopago/chargebacks/{id}", id))
@@ -90,7 +88,7 @@ class PedidoControllerTest {
     @Test
     void testWebHookMercadoPagoSimulator_Cancelado() throws Exception {
         int id = 1;
-        Pedido pedido = new Pedido(id, new ArrayList<>(), StatusPagamento.EsperandoConfirmação, BigDecimal.TEN);
+        Pedido pedido = new Pedido(id, new ArrayList<>(), StatusPagamento.PENDENTE, BigDecimal.TEN);
         when(pedidoUseCases.atualizaPedidoPagamento(any(), anyInt())).thenReturn(pedido);
 
         mockMvc.perform(post("/api/v1/pedido//pagamento/mercadopago/other/{id}", id))

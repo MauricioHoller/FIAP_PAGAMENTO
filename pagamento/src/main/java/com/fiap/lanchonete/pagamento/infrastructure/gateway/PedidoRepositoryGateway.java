@@ -5,7 +5,6 @@ import java.util.Optional;
 
 import com.fiap.lanchonete.pagamento.application.gateways.PedidoGateway;
 import com.fiap.lanchonete.pagamento.domain.entity.Pedido;
-import com.fiap.lanchonete.pagamento.domain.entity.StatusPedido;
 import com.fiap.lanchonete.pagamento.infrastructure.gateway.mapper.PedidoEntityMapper;
 import com.fiap.lanchonete.pagamento.infrastructure.persistence.PedidoRepository;
 import com.fiap.lanchonete.pagamento.infrastructure.persistence.entity.PedidoEntity;
@@ -33,9 +32,7 @@ public class PedidoRepositoryGateway implements PedidoGateway {
 
 	@Override
 	public List<Pedido> buscaPedidos() {
-		List<PedidoEntity> pedidos = repository.findAllByStatusPedidoOrderById(StatusPedido.Pronto);
-		pedidos.addAll(repository.findAllByStatusPedidoOrderById(StatusPedido.EmPreparacao).stream().toList());
-		pedidos.addAll(repository.findAllByStatusPedidoOrderById(StatusPedido.Recebido).stream().toList());
+		List<PedidoEntity> pedidos = repository.findAll().stream().toList();
 
 		return pedidos.stream().map(mapper::paraObjetoDominio).toList();
 	}
@@ -48,10 +45,4 @@ public class PedidoRepositoryGateway implements PedidoGateway {
 		return null;
 	}
 
-	@Override
-	public List<Pedido> buscaPedidosStatus(StatusPedido status) {
-		List<PedidoEntity> listaPedidos = repository.findAllByStatusPedidoOrderById(status);
-		return listaPedidos.stream().map(mapper::paraObjetoDominio).toList();
-
-	}
 }

@@ -20,7 +20,6 @@ import com.fiap.lanchonete.pagamento.domain.entity.Categoria;
 import com.fiap.lanchonete.pagamento.domain.entity.Pedido;
 import com.fiap.lanchonete.pagamento.domain.entity.Produto;
 import com.fiap.lanchonete.pagamento.domain.entity.StatusPagamento;
-import com.fiap.lanchonete.pagamento.domain.entity.StatusPedido;
 
 public class PedidioUseCasesTest {
 
@@ -44,22 +43,11 @@ public class PedidioUseCasesTest {
     }
 
     @Test
-    void testBuscaPedidosPorStatus() {
-        List<Pedido> expectedPedidos = new ArrayList<>();
-        StatusPedido status = StatusPedido.EmPreparacao;
-        when(pedidoGateway.buscaPedidosStatus(status)).thenReturn(expectedPedidos);
-
-        List<Pedido> result = pedidoUseCases.buscaPedidosPorStatus(status);
-
-        assertEquals(expectedPedidos, result);
-    }
-
-    @Test
     void testCriaPedido() {
         List<Produto> listaProdutos = new ArrayList<>();
         Produto produto = new Produto(Categoria.Lanche, "Hambúrguer", "Delicioso hambúrguer", BigDecimal.valueOf(10.0));
         listaProdutos.add(produto);
-        Pedido pedido = new Pedido(1, listaProdutos, StatusPagamento.EsperandoConfirmação, BigDecimal.valueOf(10.0));
+        Pedido pedido = new Pedido(1, listaProdutos, StatusPagamento.PENDENTE, BigDecimal.valueOf(10.0));
         when(pedidoGateway.criaPedido(pedido)).thenReturn(pedido);
 
         Pedido result = pedidoUseCases.criaPedido(pedido);
@@ -72,7 +60,7 @@ public class PedidioUseCasesTest {
         List<Produto> listaProdutos = new ArrayList<>();
         Produto produto = new Produto(Categoria.Lanche, "Hambúrguer", "Delicioso hambúrguer", BigDecimal.valueOf(10.0));
         listaProdutos.add(produto);
-        Pedido pedido = new Pedido(1, listaProdutos, StatusPagamento.EsperandoConfirmação, BigDecimal.valueOf(10.0));
+        Pedido pedido = new Pedido(1, listaProdutos, StatusPagamento.PENDENTE, BigDecimal.valueOf(10.0));
         Integer id = 1;
         when(pedidoGateway.buscaPedidoId(id)).thenReturn(pedido);
 
@@ -86,13 +74,13 @@ public class PedidioUseCasesTest {
         List<Produto> listaProdutos = new ArrayList<>();
         Produto produto = new Produto(Categoria.Lanche, "Hambúrguer", "Delicioso hambúrguer", BigDecimal.valueOf(10.0));
         listaProdutos.add(produto);
-        Pedido pedido = new Pedido(1, listaProdutos, StatusPagamento.EsperandoConfirmação, BigDecimal.valueOf(10.0));
+        Pedido pedido = new Pedido(1, listaProdutos, StatusPagamento.PENDENTE, BigDecimal.valueOf(10.0));
         String topic = "chargebacks";
         when(pedidoGateway.buscaPedidoId(1)).thenReturn(pedido);
 
         Pedido result = pedidoUseCases.atualizaPedidoPagamento(topic, 1);
 
-        assertEquals(StatusPagamento.Cancelado, result.getStatusPagamento());
+        assertEquals(StatusPagamento.CANCELADO, result.getStatusPagamento());
     }
     
  
@@ -111,13 +99,13 @@ public class PedidioUseCasesTest {
         List<Produto> listaProdutos = new ArrayList<>();
         Produto produto = new Produto(Categoria.Lanche, "Hambúrguer", "Delicioso hambúrguer", BigDecimal.valueOf(10.0));
         listaProdutos.add(produto);
-        Pedido pedido = new Pedido(1, listaProdutos, StatusPagamento.EsperandoConfirmação, BigDecimal.valueOf(10.0));
+        Pedido pedido = new Pedido(1, listaProdutos, StatusPagamento.PENDENTE, BigDecimal.valueOf(10.0));
         String topic = "chargebacks";
         when(pedidoGateway.buscaPedidoId(1)).thenReturn(pedido);
 
         Pedido result = pedidoUseCases.atualizaPedidoPagamento(topic, 1);
 
-        assertEquals(StatusPagamento.Cancelado, result.getStatusPagamento());
+        assertEquals(StatusPagamento.CANCELADO, result.getStatusPagamento());
     }
 
     @Test
@@ -125,12 +113,12 @@ public class PedidioUseCasesTest {
         List<Produto> listaProdutos = new ArrayList<>();
         Produto produto = new Produto(Categoria.Lanche, "Hambúrguer", "Delicioso hambúrguer", BigDecimal.valueOf(10.0));
         listaProdutos.add(produto);
-        Pedido pedido = new Pedido(1, listaProdutos, StatusPagamento.EsperandoConfirmação, BigDecimal.valueOf(10.0));
+        Pedido pedido = new Pedido(1, listaProdutos, StatusPagamento.PENDENTE, BigDecimal.valueOf(10.0));
         String topic = "other";
         when(pedidoGateway.buscaPedidoId(1)).thenReturn(pedido);
 
         Pedido result = pedidoUseCases.atualizaPedidoPagamento(topic, 1);
 
-        assertEquals(StatusPagamento.Pago, result.getStatusPagamento());
+        assertEquals(StatusPagamento.PAGO, result.getStatusPagamento());
     }
 }

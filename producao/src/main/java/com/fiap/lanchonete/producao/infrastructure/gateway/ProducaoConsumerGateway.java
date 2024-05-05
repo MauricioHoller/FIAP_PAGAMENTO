@@ -8,17 +8,17 @@ import com.fiap.lanchonete.producao.application.usecases.exceptions.PedidoNaoEnc
 import com.fiap.lanchonete.producao.domain.entity.event.PedidoRealizadoEvent;
 
 @Component
-public class PagamentoConsumerGateway {
-	private static final String PAGAMENTO_QUEUE_1 = "pagamento-queue";
+public class ProducaoConsumerGateway {
+	private static final String PRODUCAO_QUEUE_1 = "producao-queue";
 
 	final PedidoUseCases pedidoUseCases;
 	
-	PagamentoConsumerGateway(PedidoUseCases pedidoUseCases){
+	ProducaoConsumerGateway(PedidoUseCases pedidoUseCases){
 		this.pedidoUseCases = pedidoUseCases;
 	}
 	
-	@RabbitListener(queues = PAGAMENTO_QUEUE_1)
-	public void pagamentoRecebido(PedidoRealizadoEvent pedidoRealizado) throws PedidoNaoEncontradoException {
+	@RabbitListener(queues = PRODUCAO_QUEUE_1)
+	public void pedidoRecebido(PedidoRealizadoEvent pedidoRealizado) throws PedidoNaoEncontradoException {
 		pedidoUseCases.criaPedido(pedidoRealizado.getPedidoRealizado());
 		System.out.println("Pedido Cadastrado com sucesso!");
 	}

@@ -15,9 +15,10 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class RabbitMQConfig {
 
-	private static final String PEDIDO_EXCHANGE_1 = "pagamento-exchange";
-	private static final String PAGAMENTO_QUEUE_1 = "pagamento-queue";
-	private static final String PEDIDO_PAGAMENTO_ROUTING_KEY = "pagamento-para-pedido-routing-key";
+	private static final String PEDIDO_EXCHANGE_1 = "pedido-exchange";
+	private static final String PEDIDO_QUEUE_1 = "pedido-queue";
+	private static final String PEDIDO_PAGAMENTO_ROUTING_KEY = "pedido-para-pedido-routing-key";
+	private static final String PRODUCAO_QUEUE_1 = "producao-queue";
 
     @Bean
     Jackson2JsonMessageConverter jsonMessageConverter() {
@@ -42,10 +43,15 @@ public class RabbitMQConfig {
 	@Bean
 	Queue pagamentoQueue() {
 		return QueueBuilder
-			.nonDurable(PAGAMENTO_QUEUE_1)
+			.nonDurable(PEDIDO_QUEUE_1)
 			.build();
 	}
-
+	@Bean
+	Queue producaoQueue() {
+		return QueueBuilder
+			.nonDurable(PRODUCAO_QUEUE_1)
+			.build();
+	}
 	@Bean
 	Binding pedidoBinding(Queue pagamentoQueue, DirectExchange pedidoExchange) {
 		return BindingBuilder

@@ -6,7 +6,6 @@ import com.fiap.lanchonete.pagamento.application.gateways.PedidoGateway;
 import com.fiap.lanchonete.pagamento.application.usecases.exceptions.PedidoNaoEncontradoException;
 import com.fiap.lanchonete.pagamento.domain.entity.Pedido;
 import com.fiap.lanchonete.pagamento.domain.entity.StatusPagamento;
-import com.fiap.lanchonete.pagamento.domain.entity.StatusPedido;
 
 public class PedidoUseCasesImp implements PedidoUseCases {
 	
@@ -16,17 +15,6 @@ public class PedidoUseCasesImp implements PedidoUseCases {
 		this.pedidoGateway = pedidoGateway;
 	}
 
-	@Override
-	public List<Pedido> buscaPedidos() {
-		return pedidoGateway.buscaPedidos();
-	}
-
-	
-	@Override
-	public List<Pedido> buscaPedidosPorStatus(StatusPedido status) {
-		return pedidoGateway.buscaPedidosStatus(status);
-	}
-	
 	@Override
 	public Pedido criaPedido(Pedido pedido) {
 		return pedidoGateway.criaPedido(pedido);
@@ -49,17 +37,23 @@ public class PedidoUseCasesImp implements PedidoUseCases {
 		Pedido pedidoAtaulizado;
 		if (topic.equals("chargebacks")) {
 			pedidoAtaulizado = new Pedido(pedidoParaAtualizar.getId(), 
-					pedidoParaAtualizar.getListaProdutos(), StatusPagamento.Cancelado,pedidoParaAtualizar.getValorTotal());
+					pedidoParaAtualizar.getListaProdutos(), StatusPagamento.CANCELADO,pedidoParaAtualizar.getValorTotal());
 			pedidoGateway.atualizaPedido(pedidoAtaulizado);
 			
 			return pedidoAtaulizado;
 		} else {
 			pedidoAtaulizado = new Pedido(pedidoParaAtualizar.getId(), 
-					pedidoParaAtualizar.getListaProdutos(), StatusPagamento.Pago, pedidoParaAtualizar.getValorTotal());
+					pedidoParaAtualizar.getListaProdutos(), StatusPagamento.PAGO, pedidoParaAtualizar.getValorTotal());
 			pedidoGateway.atualizaPedido(pedidoAtaulizado);
 			return pedidoAtaulizado;
 		}
 
+	}
+
+	@Override
+	public List<Pedido> buscaPedidos() {
+		return pedidoGateway.buscaPedidos();
+		
 	}
 
 }

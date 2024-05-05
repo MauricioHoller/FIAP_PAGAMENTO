@@ -14,6 +14,10 @@ public class PedidoResponse {
 	StatusPagamento statusPagamento;
 	BigDecimal valorTotal;
 	
+	public PedidoResponse() {
+		super();
+	};
+	
 	public PedidoResponse(Integer idPedido, List<Produto>listaProdutos, 
 			StatusPagamento statusPagamento, BigDecimal valorTotal) {
 		super();

@@ -17,7 +17,7 @@ class PedidoRequestTest {
     void testGettersAndSetters() {
         Integer idPedido = 1;
         List<Produto> listaProdutos = new ArrayList<>();
-        StatusPagamento statusPagamento = StatusPagamento.EsperandoConfirmação;
+        StatusPagamento statusPagamento = StatusPagamento.PENDENTE;
         BigDecimal valorTotal = BigDecimal.TEN;
 
         PedidoRequest pedidoRequest = new PedidoRequest();

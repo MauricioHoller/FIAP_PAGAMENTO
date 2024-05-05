@@ -15,7 +15,7 @@ public class PedidoRealizadoEvent {
 	PedidoRealizadoEvent(){
 		
 	}
-	PedidoRealizadoEvent(Pedido pedidoRealizado){
-		this.pedidoRealizado =pedidoRealizado;
+	public PedidoRealizadoEvent(Pedido pedidoRealizado){
+		this.pedidoRealizado = pedidoRealizado;
 	}
 }

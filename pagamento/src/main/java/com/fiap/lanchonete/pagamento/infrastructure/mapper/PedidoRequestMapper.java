@@ -1,7 +1,6 @@
 package com.fiap.lanchonete.pagamento.infrastructure.mapper;
 
 import com.fiap.lanchonete.pagamento.domain.entity.Pedido;
-import com.fiap.lanchonete.pagamento.infrastructure.requestsdto.PedidoPagamentoResponse;
 import com.fiap.lanchonete.pagamento.infrastructure.requestsdto.PedidoRequest;
 import com.fiap.lanchonete.pagamento.infrastructure.requestsdto.PedidoResponse;
 
@@ -16,7 +15,5 @@ public class PedidoRequestMapper {
 	public PedidoResponse paraResponse(Pedido pedido) {
 		return new PedidoResponse(pedido.getId(), pedido.getListaProdutos(), pedido.getStatusPagamento(), pedido.getValorTotal());
 	}
-	public PedidoPagamentoResponse paraResponseDTO(Pedido pedido) {
-		return new PedidoPagamentoResponse(pedido.getId(), pedido.getStatusPagamento(), pedido.getValorTotal());
-	}
+	
 }

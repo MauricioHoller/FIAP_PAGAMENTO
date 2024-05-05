@@ -21,7 +21,7 @@ services:
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: pedido, pagamento
+      POSTGRES_DB: pedido,pagamento
     ports:
       - "5432:5432"
     networks:

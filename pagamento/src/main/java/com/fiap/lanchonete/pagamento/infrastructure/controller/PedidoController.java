@@ -9,7 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,9 +16,7 @@ import com.fiap.lanchonete.pagamento.application.usecases.PedidoUseCases;
 import com.fiap.lanchonete.pagamento.application.usecases.exceptions.PedidoNaoEncontradoException;
 import com.fiap.lanchonete.pagamento.domain.entity.Pedido;
 import com.fiap.lanchonete.pagamento.domain.entity.StatusPagamento;
-import com.fiap.lanchonete.pagamento.domain.entity.StatusPedido;
 import com.fiap.lanchonete.pagamento.infrastructure.mapper.PedidoRequestMapper;
-import com.fiap.lanchonete.pagamento.infrastructure.requestsdto.PedidoPagamentoResponse;
 import com.fiap.lanchonete.pagamento.infrastructure.requestsdto.PedidoResponse;
 
 @RestController
@@ -53,34 +50,18 @@ public class PedidoController {
 		}
 	};
 
-	@GetMapping("pagamento/{id}")
-	public ResponseEntity<PedidoPagamentoResponse> buscaPedidosPagamento(@PathVariable Integer id) {
-		try {
-			return new ResponseEntity<>(mapper.paraResponseDTO(pedidoUseCases.buscaPedidoId(id)), HttpStatus.OK);
-
-		} catch (PedidoNaoEncontradoException e) {
-			return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
-		}
-	};
-
-	@GetMapping("/status")
-	public List<PedidoResponse> buscaPedidosPorStatus(@RequestBody StatusPedido status) {
-		 var list = pedidoUseCases.buscaPedidosPorStatus(status);
-		 if (list.isEmpty())
-			 return null;
-		 return list.stream().map(mapper::paraResponse).toList();
-	};
 
 	// WEBHOOK
 	@PostMapping("pagamento/mercadopago/{topic}/{id}")
 	ResponseEntity<String> webHookMercadoPagoSimulator(@PathVariable("topic") String topic, @PathVariable("id") Integer id) {
 		Pedido pedidoAtualizado = pedidoUseCases.atualizaPedidoPagamento(topic, id);
+		
 		template.convertAndSend(PEDIDO_EXCHANGE_1, PEDIDO_PAGAMENTO_ROUTING_KEY, pedidoAtualizado);
-		if (pedidoAtualizado.getStatusPagamento().equals(StatusPagamento.Pago)) {
+		
+		if (pedidoAtualizado.getStatusPagamento().equals(StatusPagamento.PAGO)) {
 			return ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body("Pedido pago com sucesso!");
 		} else {
 			return ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body("Pedido Cancelado!");
-
 		}
 	}
 

@@ -18,10 +18,11 @@ public class PedidoRequest {
 	}
 	
 	public PedidoRequest(Integer idPedido, List<Produto> listaProdutos,
-			StatusPagamento statusPagamento) {
+			StatusPagamento statusPagamento, BigDecimal valorTotal) {
 		this.idPedido = idPedido;
 		this.listaProdutos = listaProdutos;
 		this.statusPagamento = statusPagamento;
+		this.valorTotal = valorTotal;
 	}
 	public Integer getIdPedido() {
 		return idPedido;

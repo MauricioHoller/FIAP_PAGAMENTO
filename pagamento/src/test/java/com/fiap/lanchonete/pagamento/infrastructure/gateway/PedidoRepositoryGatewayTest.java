@@ -1,7 +1,11 @@
 package com.fiap.lanchonete.pagamento.infrastructure.gateway;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +16,6 @@ import org.junit.jupiter.api.Test;
 
 import com.fiap.lanchonete.pagamento.application.gateways.PedidoGateway;
 import com.fiap.lanchonete.pagamento.domain.entity.Pedido;
-import com.fiap.lanchonete.pagamento.domain.entity.StatusPedido;
 import com.fiap.lanchonete.pagamento.infrastructure.gateway.mapper.PedidoEntityMapper;
 import com.fiap.lanchonete.pagamento.infrastructure.persistence.PedidoRepository;
 import com.fiap.lanchonete.pagamento.infrastructure.persistence.entity.PedidoEntity;
@@ -42,7 +45,16 @@ class PedidoRepositoryGatewayTest {
 
         assertEquals(pedido, result);
     }
+    @Test
+    void testBuscaPedidos() {
+        List<PedidoEntity> pedidoEntities = new ArrayList<>();
+        when(repository.findAll()).thenReturn(pedidoEntities);
 
+        pedidoGateway.buscaPedidos();
+
+        verify(repository).findAll();
+    }
+    
     @Test
     void testAtualizaPedido() {
         Pedido pedido = new Pedido();
@@ -52,19 +64,6 @@ class PedidoRepositoryGatewayTest {
         pedidoGateway.atualizaPedido(pedido);
 
         verify(repository, times(1)).save(pedidoEntity);
-    }
-
-    @Test
-    void testBuscaPedidos() {
-        List<PedidoEntity> pedidoEntities = new ArrayList<>();
-        when(repository.findAllByStatusPedidoOrderById(StatusPedido.Pronto)).thenReturn(pedidoEntities);
-        when(repository.findAllByStatusPedidoOrderById(StatusPedido.EmPreparacao)).thenReturn(pedidoEntities);
-        when(repository.findAllByStatusPedidoOrderById(StatusPedido.Recebido)).thenReturn(pedidoEntities);
-        when(mapper.paraObjetoDominio(any(PedidoEntity.class))).thenReturn(new Pedido());
-
-        List<Pedido> result = pedidoGateway.buscaPedidos();
-
-        assertEquals(0, result.size());
     }
 
     @Test
@@ -90,15 +89,4 @@ class PedidoRepositoryGatewayTest {
         assertNull(result);
     }
 
-    @Test
-    void testBuscaPedidosStatus() {
-        List<PedidoEntity> pedidoEntities = new ArrayList<>();
-        StatusPedido status = StatusPedido.Recebido;
-        when(repository.findAllByStatusPedidoOrderById(status)).thenReturn(pedidoEntities);
-        when(mapper.paraObjetoDominio(any(PedidoEntity.class))).thenReturn(new Pedido());
-
-        List<Pedido> result = pedidoGateway.buscaPedidosStatus(status);
-
-        assertEquals(0, result.size());
-    }
 }

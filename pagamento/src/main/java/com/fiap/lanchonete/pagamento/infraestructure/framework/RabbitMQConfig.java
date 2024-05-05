@@ -16,7 +16,9 @@ import org.springframework.context.annotation.Configuration;
 public class RabbitMQConfig {
 
 	private static final String PEDIDO_EXCHANGE_1 = "pagamento-exchange";
-	private static final String PAGAMENTO_QUEUE_1 = "pedido-queue";
+	private static final String PAGAMENTO_QUEUE_1 = "pagamento-queue";
+	private static final String PEDIDO_QUEUE_1 = "pedido-queue";
+
 	private static final String PEDIDO_PAGAMENTO_ROUTING_KEY = "pagamento-para-pedido-routing-key";
 
     @Bean
@@ -47,9 +49,16 @@ public class RabbitMQConfig {
 	}
 
 	@Bean
-	Binding pedidoBinding(Queue pagamentoQueue, DirectExchange pedidoExchange) {
+	Queue pedidoQueue() {
+		return QueueBuilder
+			.nonDurable(PEDIDO_QUEUE_1)
+			.build();
+	}
+
+	@Bean
+	Binding pedidoBinding(Queue pedidoQueue, DirectExchange pedidoExchange) {
 		return BindingBuilder
-			.bind(pagamentoQueue)
+			.bind(pedidoQueue)
 			.to(pedidoExchange)
 			.with(PEDIDO_PAGAMENTO_ROUTING_KEY);
 	}
