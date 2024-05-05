@@ -1,6 +1,5 @@
 package com.fiap.lanchonete.pagamento.domain.entity.event;
 
-
 import com.fiap.lanchonete.pagamento.domain.entity.Pedido;
 
 public class PedidoRealizadoEvent {

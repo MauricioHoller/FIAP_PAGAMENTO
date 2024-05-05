@@ -65,7 +65,10 @@ public class PedidoController {
 
 	@GetMapping("/status")
 	public List<PedidoResponse> buscaPedidosPorStatus(@RequestBody StatusPedido status) {
-		return pedidoUseCases.buscaPedidosPorStatus(status).stream().map(mapper::paraResponse).toList();
+		 var list = pedidoUseCases.buscaPedidosPorStatus(status);
+		 if (list.isEmpty())
+			 return null;
+		 return list.stream().map(mapper::paraResponse).toList();
 	};
 
 	// WEBHOOK

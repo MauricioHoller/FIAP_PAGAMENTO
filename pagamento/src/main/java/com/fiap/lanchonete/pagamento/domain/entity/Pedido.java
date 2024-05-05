@@ -9,7 +9,7 @@ public class Pedido {
 	List<Produto> listaProdutos;
 	StatusPagamento statusPagamento;
 	BigDecimal valorTotal;
-	Pedido(){
+	public Pedido(){
 		
 	}
 	public Pedido(Integer id, List<Produto> listaProdutos,

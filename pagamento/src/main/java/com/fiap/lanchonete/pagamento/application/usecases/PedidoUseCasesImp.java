@@ -9,7 +9,6 @@ import com.fiap.lanchonete.pagamento.domain.entity.StatusPagamento;
 import com.fiap.lanchonete.pagamento.domain.entity.StatusPedido;
 
 public class PedidoUseCasesImp implements PedidoUseCases {
-
 	
 	private final PedidoGateway pedidoGateway;
 
@@ -59,7 +58,6 @@ public class PedidoUseCasesImp implements PedidoUseCases {
 					pedidoParaAtualizar.getListaProdutos(), StatusPagamento.Pago, pedidoParaAtualizar.getValorTotal());
 			pedidoGateway.atualizaPedido(pedidoAtaulizado);
 			return pedidoAtaulizado;
-
 		}
 
 	}

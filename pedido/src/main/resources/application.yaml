@@ -11,7 +11,7 @@ spring:
     username: ${RABBIT_USERNAME:guest}
     password: ${RABBIT_PASSWORD:guest}
   datasource:
-    url: ${CONNECTION_STRING:jdbc:postgresql://localhost:5432/fiap}
+    url: ${CONNECTION_STRING:jdbc:postgresql://localhost:5432/pedido}
     password: postgres
     username: postgres
     driver-class-name: org.postgresql.Driver

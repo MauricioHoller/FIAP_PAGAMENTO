@@ -1,7 +1,5 @@
 package com.fiap.lanchonete.pagamento.infrastructure.persistence.entity;
 
-
-
 import java.math.BigDecimal;
 import java.util.List;
 
