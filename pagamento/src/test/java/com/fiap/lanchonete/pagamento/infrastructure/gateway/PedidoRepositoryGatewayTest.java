@@ -14,11 +14,12 @@ import java.util.Optional;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import com.fiap.lanchonete.pagamento.application.gateways.PedidoGateway;
-import com.fiap.lanchonete.pagamento.domain.entity.Pedido;
-import com.fiap.lanchonete.pagamento.infrastructure.gateway.mapper.PedidoEntityMapper;
-import com.fiap.lanchonete.pagamento.infrastructure.persistence.PedidoRepository;
-import com.fiap.lanchonete.pagamento.infrastructure.persistence.entity.PedidoEntity;
+import com.fiap.lanchonete.application.gateways.PedidoGateway;
+import com.fiap.lanchonete.domain.entity.Pedido;
+import com.fiap.lanchonete.infrastructure.gateway.PedidoRepositoryGateway;
+import com.fiap.lanchonete.infrastructure.gateway.mapper.PedidoEntityMapper;
+import com.fiap.lanchonete.infrastructure.persistence.PedidoRepository;
+import com.fiap.lanchonete.infrastructure.persistence.entity.PedidoEntity;
 
 class PedidoRepositoryGatewayTest {
 

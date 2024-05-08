@@ -12,14 +12,14 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import com.fiap.lanchonete.pagamento.application.gateways.PedidoGateway;
-import com.fiap.lanchonete.pagamento.application.usecases.PedidoUseCases;
-import com.fiap.lanchonete.pagamento.application.usecases.PedidoUseCasesImp;
-import com.fiap.lanchonete.pagamento.application.usecases.exceptions.PedidoNaoEncontradoException;
-import com.fiap.lanchonete.pagamento.domain.entity.Categoria;
-import com.fiap.lanchonete.pagamento.domain.entity.Pedido;
-import com.fiap.lanchonete.pagamento.domain.entity.Produto;
-import com.fiap.lanchonete.pagamento.domain.entity.StatusPagamento;
+import com.fiap.lanchonete.application.gateways.PedidoGateway;
+import com.fiap.lanchonete.application.usecases.PedidoUseCases;
+import com.fiap.lanchonete.application.usecases.PedidoUseCasesImp;
+import com.fiap.lanchonete.application.usecases.exceptions.PedidoNaoEncontradoException;
+import com.fiap.lanchonete.domain.entity.Categoria;
+import com.fiap.lanchonete.domain.entity.Pedido;
+import com.fiap.lanchonete.domain.entity.Produto;
+import com.fiap.lanchonete.domain.entity.StatusPagamento;
 
 public class PedidioUseCasesTest {
 

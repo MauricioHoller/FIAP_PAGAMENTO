@@ -6,9 +6,10 @@ import java.math.BigDecimal;
 
 import org.junit.jupiter.api.Test;
 
-import com.fiap.lanchonete.pagamento.domain.entity.Categoria;
-import com.fiap.lanchonete.pagamento.domain.entity.Produto;
-import com.fiap.lanchonete.pagamento.infrastructure.persistence.entity.ProdutoEntity;
+import com.fiap.lanchonete.domain.entity.Categoria;
+import com.fiap.lanchonete.domain.entity.Produto;
+import com.fiap.lanchonete.infrastructure.gateway.mapper.ProdutoEntityMapper;
+import com.fiap.lanchonete.infrastructure.persistence.entity.ProdutoEntity;
 
 class ProdutoEntityMapperTest {
 

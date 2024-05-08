@@ -8,8 +8,9 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import com.fiap.lanchonete.pagamento.domain.entity.StatusPagamento;
-import com.fiap.lanchonete.pagamento.domain.entity.Produto;
+import com.fiap.lanchonete.domain.entity.Produto;
+import com.fiap.lanchonete.domain.entity.StatusPagamento;
+import com.fiap.lanchonete.infrastructure.persistence.entity.PedidoEntity;
 
 class PedidoEntityTest {
 

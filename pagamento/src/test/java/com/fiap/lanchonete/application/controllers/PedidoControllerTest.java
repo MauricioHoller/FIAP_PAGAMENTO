@@ -20,12 +20,12 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import com.fiap.lanchonete.pagamento.application.usecases.PedidoUseCases;
-import com.fiap.lanchonete.pagamento.application.usecases.exceptions.PedidoNaoEncontradoException;
-import com.fiap.lanchonete.pagamento.domain.entity.Pedido;
-import com.fiap.lanchonete.pagamento.domain.entity.StatusPagamento;
-import com.fiap.lanchonete.pagamento.infrastructure.controller.PedidoController;
-import com.fiap.lanchonete.pagamento.infrastructure.mapper.PedidoRequestMapper;
+import com.fiap.lanchonete.application.usecases.PedidoUseCases;
+import com.fiap.lanchonete.application.usecases.exceptions.PedidoNaoEncontradoException;
+import com.fiap.lanchonete.domain.entity.Pedido;
+import com.fiap.lanchonete.domain.entity.StatusPagamento;
+import com.fiap.lanchonete.infrastructure.controller.PedidoController;
+import com.fiap.lanchonete.infrastructure.mapper.PedidoRequestMapper;
 
 class PedidoControllerTest {
 

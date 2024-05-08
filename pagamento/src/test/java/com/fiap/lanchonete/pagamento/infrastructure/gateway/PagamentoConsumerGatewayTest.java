@@ -8,10 +8,11 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import com.fiap.lanchonete.pagamento.application.usecases.PedidoUseCases;
-import com.fiap.lanchonete.pagamento.application.usecases.exceptions.PedidoNaoEncontradoException;
-import com.fiap.lanchonete.pagamento.domain.entity.Pedido;
-import com.fiap.lanchonete.pagamento.domain.entity.event.PedidoRealizadoEvent;
+import com.fiap.lanchonete.application.usecases.PedidoUseCases;
+import com.fiap.lanchonete.application.usecases.exceptions.PedidoNaoEncontradoException;
+import com.fiap.lanchonete.domain.entity.Pedido;
+import com.fiap.lanchonete.domain.entity.event.PedidoRealizadoEvent;
+import com.fiap.lanchonete.infrastructure.gateway.PagamentoConsumerGateway;
 
 @ExtendWith(MockitoExtension.class)
 class PagamentoConsumerGatewayTest {

@@ -9,11 +9,12 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import com.fiap.lanchonete.pagamento.domain.entity.Pedido;
-import com.fiap.lanchonete.pagamento.domain.entity.Produto;
-import com.fiap.lanchonete.pagamento.domain.entity.StatusPagamento;
-import com.fiap.lanchonete.pagamento.infrastructure.requestsdto.PedidoRequest;
-import com.fiap.lanchonete.pagamento.infrastructure.requestsdto.PedidoResponse;
+import com.fiap.lanchonete.domain.entity.Pedido;
+import com.fiap.lanchonete.domain.entity.Produto;
+import com.fiap.lanchonete.domain.entity.StatusPagamento;
+import com.fiap.lanchonete.infrastructure.mapper.PedidoRequestMapper;
+import com.fiap.lanchonete.infrastructure.requestsdto.PedidoRequest;
+import com.fiap.lanchonete.infrastructure.requestsdto.PedidoResponse;
 
 class PedidoRequestMapperTest {
 

@@ -17,7 +17,7 @@ import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 import org.testcontainers.utility.DockerImageName;
 
-import com.fiap.lanchonete.pagamento.ApplicationPedido;
+import com.fiap.lanchonete.ApplicationPedido;
 
 @SpringBootTest(classes = ApplicationPedido.class)
 @Testcontainers

@@ -8,8 +8,9 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import com.fiap.lanchonete.pagamento.domain.entity.Categoria;
-import com.fiap.lanchonete.pagamento.domain.entity.Produto;
+import com.fiap.lanchonete.domain.entity.Categoria;
+import com.fiap.lanchonete.domain.entity.Produto;
+import com.fiap.lanchonete.infrastructure.persistence.converters.ProdutoListConverter;
 
 class ProdutoListConverterTest {
 
