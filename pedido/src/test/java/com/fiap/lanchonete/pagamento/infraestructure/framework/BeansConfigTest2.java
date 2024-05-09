@@ -16,12 +16,12 @@ import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 import org.testcontainers.utility.DockerImageName;
 
-import com.fiap.lanchonete.ApplicationPagamento;
+import com.fiap.lanchonete.ApplicationPedido;
 
-@SpringBootTest(classes = ApplicationPagamento.class)
+@SpringBootTest(classes = ApplicationPedido.class)
 @Testcontainers
-@ContextConfiguration(initializers = {BeansConfigTest.Initializer.class})
-class BeansConfigTest {
+@ContextConfiguration(initializers = {BeansConfigTest2.Initializer.class})
+class BeansConfigTest2 {
 
     @Autowired
     private ApplicationContext context;
@@ -40,15 +40,24 @@ class BeansConfigTest {
 
     @Test
     void testBeansExistence() {
+        assertThat(context.getBean("pedidoInteractorBean")).isNotNull();
+        assertThat(context.getBean("pedidoGateway")).isNotNull();
+        assertThat(context.getBean("pedidoMapper")).isNotNull();
+        assertThat(context.getBean("pedidoRequestMapper")).isNotNull();
+        assertThat(context.getBean("produtoInteractorBean")).isNotNull();
+        assertThat(context.getBean("produtoGateway")).isNotNull();
+        assertThat(context.getBean("produtoMapper")).isNotNull();
+        assertThat(context.getBean("produtoRequestMapper")).isNotNull();
         assertThat(context.getBean("jsonMessageConverter")).isNotNull();
         assertThat(context.getBean("rabbitTemplate")).isNotNull();
         assertThat(context.getBean("pedidoExchange")).isNotNull();
+
+        assertThat(context.getBean("pedidoQueue")).isNotNull();
         assertThat(context.getBean("pagamentoQueue")).isNotNull();
         assertThat(context.getBean("pedidoBinding")).isNotNull();
-        assertThat(context.getBean("pedidoGateway")).isNotNull();
-        assertThat(context.getBean("pedidoInteractorBean")).isNotNull();
-        assertThat(context.getBean("pedidoMapper")).isNotNull();
-        assertThat(context.getBean("pedidoRequestMapper")).isNotNull();
+        assertThat(context.getBean("producaoQueue")).isNotNull();
+        assertThat(context.getBean("pedido2Binding")).isNotNull();
+
     }
    
     static class Initializer
