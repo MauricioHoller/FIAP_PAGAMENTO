@@ -2,6 +2,7 @@ package com.fiap.lanchonete.domain.entity;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Objects;
 
 import lombok.EqualsAndHashCode;
 
@@ -60,6 +61,25 @@ public class Pedido {
 
 	public void setValorTotal(BigDecimal valorTotal) {
 		this.valorTotal = valorTotal;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id, listaProdutos, statusPagamento, statusPedido, valorTotal);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Pedido other = (Pedido) obj;
+		return Objects.equals(id, other.id) && Objects.equals(listaProdutos, other.listaProdutos)
+				&& statusPagamento == other.statusPagamento && statusPedido == other.statusPedido
+				&& Objects.equals(valorTotal, other.valorTotal);
 	}
 
 }

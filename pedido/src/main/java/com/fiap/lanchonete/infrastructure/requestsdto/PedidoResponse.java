@@ -2,6 +2,7 @@ package com.fiap.lanchonete.infrastructure.requestsdto;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Objects;
 
 import com.fiap.lanchonete.domain.entity.Produto;
 import com.fiap.lanchonete.domain.entity.StatusPagamento;
@@ -16,6 +17,25 @@ public class PedidoResponse {
 	StatusPagamento statusPagamento;
 	BigDecimal valorTotal;
 	
+	@Override
+	public int hashCode() {
+		return Objects.hash(idPedido, listaProdutos, statusPagamento, statusPedido, valorTotal);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		PedidoResponse other = (PedidoResponse) obj;
+		return Objects.equals(idPedido, other.idPedido) && Objects.equals(listaProdutos, other.listaProdutos)
+				&& statusPagamento == other.statusPagamento && statusPedido == other.statusPedido
+				&& Objects.equals(valorTotal, other.valorTotal);
+	}
+
 	public PedidoResponse(Integer idPedido, List<Produto>listaProdutos, StatusPedido statusPedido,
 			StatusPagamento statusPagamento, BigDecimal valorTotal) {
 		super();

@@ -8,7 +8,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -84,20 +83,6 @@ public class PedidoController {
 
 		} catch (PedidoComProdutoNaoCadastradoException e) {
 			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
-		}
-	}
-
-	// Será colocado como consumer do terceiro serviço
-	@PutMapping("status/{id}/{statusRequest}")
-	public ResponseEntity<String> atualizaPedidoStatus(@PathVariable Integer id, @PathVariable String statusRequest) {
-		try {
-
-			pedidoUseCases.atualizaPedidoStatus(id, StatusPedido.valueOf(statusRequest));
-			return new ResponseEntity<>(
-					String.format("Pedido atualizado para" + statusRequest.toString() + "com sucesso", statusRequest),
-					HttpStatus.ACCEPTED);
-		} catch (PedidoNaoEncontradoException e) {
-			return new ResponseEntity<>("Pedido não encontrado", HttpStatus.BAD_REQUEST);
 		}
 	}
 
