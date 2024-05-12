@@ -5,8 +5,6 @@ import java.util.List;
 import com.fiap.lanchonete.domain.entity.Pedido;
 import com.fiap.lanchonete.domain.entity.StatusPedido;
 
-
-
 public interface PedidoGateway {
 	Pedido criaPedido(Pedido pedido);
 

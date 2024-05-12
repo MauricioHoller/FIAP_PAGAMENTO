@@ -9,9 +9,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fiap.lanchonete.application.usecases.PedidoUseCases;
 import com.fiap.lanchonete.application.usecases.exceptions.PedidoNaoEncontradoException;
 import com.fiap.lanchonete.domain.entity.Pedido;
@@ -42,6 +44,12 @@ public class PedidoController {
 		return pedidoUseCases.buscaPedidos().stream().map(mapper::paraResponse).toList();
 	};
 
+	@PostMapping
+	public ResponseEntity<PedidoResponse> RegistraPedido(@RequestBody Pedido pedido) throws JsonProcessingException {
+		return new ResponseEntity<> (mapper.paraResponse(pedidoUseCases.criaPedido(pedido)), HttpStatus.CREATED);
+	};
+	
+	
 	@GetMapping("{id}")
 	public ResponseEntity<PedidoResponse> buscaPedidosPorId(@PathVariable("id") int id) {
 		try {

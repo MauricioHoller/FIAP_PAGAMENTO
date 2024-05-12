@@ -12,7 +12,7 @@ public class Pedido implements Comparable<Pedido>{
 	BigDecimal valorTotal;
 	LocalTime dataCricao;
 	
-	Pedido(){
+	public Pedido(){
 		
 	}
 	public Pedido(Integer id, List<Produto> string,

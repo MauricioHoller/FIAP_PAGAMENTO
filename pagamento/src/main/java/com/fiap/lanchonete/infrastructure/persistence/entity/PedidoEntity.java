@@ -50,7 +50,6 @@ public class PedidoEntity {
 		this.listaProdutosPedido = listaProdutosPedido;
 		this.statusPagamento = statusPagamento;
 		this.valorTotal = valorTotal;
-
 	}
 
 	public Integer getId() {

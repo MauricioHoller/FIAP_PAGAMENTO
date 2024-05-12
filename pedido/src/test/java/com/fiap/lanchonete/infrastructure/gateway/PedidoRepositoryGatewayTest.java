@@ -112,7 +112,6 @@ public class PedidoRepositoryGatewayTest {
         when(mapper.paraObjetoDominio(pedido12)).thenReturn(pedido2);
 
         List<Pedido> result = pedidoGateway.buscaPedidosStatus(status);
-        System.out.println(result.size());
         assertNotNull(result);
         assertEquals(pedidos, result);
     }

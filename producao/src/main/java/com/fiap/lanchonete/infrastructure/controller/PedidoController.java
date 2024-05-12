@@ -8,7 +8,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -45,12 +44,8 @@ public class PedidoController {
 
 	@GetMapping("proximo")
 	public ResponseEntity<PedidoResponse> buscaPoximoPedido() {
-		try {
-			return new ResponseEntity<>(mapper.paraResponse(pedidoUseCases.buscaProximoPedido()), HttpStatus.OK);
-		} catch (PedidoNaoEncontradoException e) {
-			return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
-		}
-	};
+			return new ResponseEntity<>(mapper.paraResponse(pedidoUseCases.buscaProximoPedido()), HttpStatus.OK);	
+	}
 	@GetMapping("{id}")
 	public ResponseEntity<PedidoResponse> buscaPedidosPorId(@PathVariable("id") int id) {
 		try {
@@ -60,8 +55,8 @@ public class PedidoController {
 		}
 	};
 
-	@GetMapping("/status")
-	public List<PedidoResponse> buscaPedidosPorStatus(@RequestBody StatusPedido status) {
+	@GetMapping("/status/{status}")
+	public List<PedidoResponse> buscaPedidosPorStatus(@PathVariable StatusPedido status) {
 		return pedidoUseCases.buscaPedidosPorStatus(status).stream().map(mapper::paraResponse).toList();
 	};
 

@@ -67,7 +67,7 @@ public class PedidoController {
 		return pedidoUseCases.buscaPedidosPorStatus(status).stream().map(mapper::paraResponse).toList();
 	};
 
-	// FAKE CHECKOUT
+	// cria o pedido
 	@PostMapping
 	public ResponseEntity<PedidoResponse> realizarPedido(@RequestBody PedidoRequest pedido) {
 		try {

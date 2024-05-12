@@ -13,8 +13,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import com.fiap.lanchonete.application.gateways.PedidoGateway;
-import com.fiap.lanchonete.application.usecases.PedidoUseCases;
-import com.fiap.lanchonete.application.usecases.PedidoUseCasesImp;
 import com.fiap.lanchonete.application.usecases.exceptions.PedidoNaoEncontradoException;
 import com.fiap.lanchonete.domain.entity.Categoria;
 import com.fiap.lanchonete.domain.entity.Pedido;

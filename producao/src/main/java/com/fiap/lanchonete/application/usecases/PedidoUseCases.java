@@ -14,7 +14,7 @@ public interface PedidoUseCases {
 
 	public Pedido buscaPedidoId(Integer id) throws PedidoNaoEncontradoException;
 	
-	public Pedido buscaProximoPedido() throws PedidoNaoEncontradoException;
+	public Pedido buscaProximoPedido();
 	
 	public Pedido atualizaPedidoStatus(Integer id, StatusPedido status);
 	

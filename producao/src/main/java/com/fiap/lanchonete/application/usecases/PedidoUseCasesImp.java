@@ -5,7 +5,6 @@ import java.util.List;
 import com.fiap.lanchonete.application.gateways.PedidoGateway;
 import com.fiap.lanchonete.application.usecases.exceptions.PedidoNaoEncontradoException;
 import com.fiap.lanchonete.domain.entity.Pedido;
-import com.fiap.lanchonete.domain.entity.StatusPagamento;
 import com.fiap.lanchonete.domain.entity.StatusPedido;
 
 public class PedidoUseCasesImp implements PedidoUseCases {
@@ -43,7 +42,7 @@ public class PedidoUseCasesImp implements PedidoUseCases {
 	}
 	
 	@Override
-	public Pedido buscaProximoPedido() throws PedidoNaoEncontradoException {
+	public Pedido buscaProximoPedido()  {
 		Pedido pedido = pedidoGateway.buscaPedidosStatus(StatusPedido.RECEBIDO).get(0);
 		return pedido;
 	}
